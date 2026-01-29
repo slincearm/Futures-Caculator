@@ -16,8 +16,9 @@ export const calculateResults = (state: InputState): CalculationResult => {
 
     // 2. Risk Indicators
     const totalMM = maintenanceMargin * lots;
+    const totalIM = initialMargin * lots;
 
-    const riskRatio = lots > 0 ? (totalEquityUSD / totalMM) * 100 : 0;
+    const riskRatio = lots > 0 ? (totalEquityUSD / totalIM) * 100 : 0;
 
     // 3. Margin Call Price
     const equitySurplus = totalEquityUSD - totalMM;
@@ -29,7 +30,7 @@ export const calculateResults = (state: InputState): CalculationResult => {
     const liquidationPrice = lots > 0 ? currentPrice - priceDropTo0 : 0;
 
     // Status
-    const isCall = riskRatio < 100 && lots > 0;
+    const isCall = lots > 0 && totalEquityUSD < totalMM;
     const isLiquidated = totalEquityUSD <= 0;
 
     return {

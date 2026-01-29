@@ -22,7 +22,7 @@ export interface CalculationResult {
 }
 
 export const CONSTANTS = {
-    IM: 2739, // Initial Margin
-    MM: 2490, // Maintenance Margin
+    IM: 2917, // Initial Margin
+    MM: 2652, // Maintenance Margin
     CONTRACT_SIZE: 10, // 10 oz per lot
 };

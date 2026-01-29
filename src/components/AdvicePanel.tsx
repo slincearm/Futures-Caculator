@@ -3,9 +3,10 @@ import type { CalculationResult } from '../types';
 
 interface AdvicePanelProps {
     result: CalculationResult;
+    t: any;
 }
 
-export const AdvicePanel: React.FC<AdvicePanelProps> = ({ result }) => {
+export const AdvicePanel: React.FC<AdvicePanelProps> = ({ result, t }) => {
     return (
         <div className="bg-blue-500/10 border border-blue-500/10 rounded-xl p-4">
             <div className="flex items-start gap-3">
@@ -15,14 +16,14 @@ export const AdvicePanel: React.FC<AdvicePanelProps> = ({ result }) => {
                     </svg>
                 </div>
                 <div className="text-xs text-blue-200/80 space-y-1">
-                    <p className="font-semibold text-blue-200">財務建議</p>
+                    <p className="font-semibold text-blue-200">{t.adviceTitle}</p>
                     {result.riskRatio < 150 && (
-                        <p>• 您的風險較高，建議補足保證金以提升至 150% 以上。</p>
+                        <p>{t.adviceHighRisk}</p>
                     )}
                     {result.riskRatio < 120 && (
-                        <p className="text-red-300">• 警告：接近催繳水位，請留意市場波動。</p>
+                        <p className="text-red-300">{t.adviceWarning}</p>
                     )}
-                    <p>• 請留意合約月份，接近結算日請提早轉倉。</p>
+                    <p>{t.adviceGeneric}</p>
                 </div>
             </div>
         </div>
