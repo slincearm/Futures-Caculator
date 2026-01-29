@@ -73,7 +73,7 @@ function App() {
           t={t}
         />
 
-        <main className="flex-1 p-5 space-y-6 overflow-y-auto pb-20 touch-pan-y">
+        <main className="flex-1 p-3 sm:p-5 space-y-4 sm:space-y-6 overflow-y-auto pb-20 touch-pan-y">
 
           <ResultPanel
             result={results}

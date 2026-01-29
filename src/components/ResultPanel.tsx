@@ -36,7 +36,7 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({ result, currency, reco
     return (
         <div className="space-y-4">
             {/* Main Equity Card */}
-            <div className={`relative overflow-hidden rounded-2xl p-6 border ${riskBg} transition-all duration-500`}>
+            <div className={`relative overflow-hidden rounded-2xl p-4 sm:p-6 border ${riskBg} transition-all duration-500`}>
                 <div className="relative z-10">
                     <div className="flex justify-between items-start mb-1">
                         <p className="text-slate-400 text-xs font-medium uppercase tracking-wider">{t.totalEquity}</p>
@@ -54,7 +54,7 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({ result, currency, reco
                     </div>
 
                     <div className="flex items-baseline gap-2">
-                        <span className="text-3xl font-bold text-white tracking-tight">
+                        <span className="text-2xl sm:text-3xl font-bold text-white tracking-tight">
                             {currencySymbol} {fmt(displayedEquity)}
                         </span>
                     </div>

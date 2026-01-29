@@ -17,7 +17,7 @@ export const InputCard: React.FC<InputCardProps> = ({ state, onChange, t }) => {
     const fmt = (n: number) => n.toLocaleString('zh-TW', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
 
     return (
-        <div className="p-5 bg-slate-800/40 backdrop-blur-sm rounded-2xl border border-white/5 space-y-4">
+        <div className="p-4 sm:p-5 bg-slate-800/40 backdrop-blur-sm rounded-2xl border border-white/5 space-y-4">
 
             <div className="grid grid-cols-2 gap-4">
                 {/* Row 1 - Lots */}

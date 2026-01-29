@@ -15,7 +15,7 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currency, setCurrency, exchangeRate, setExchangeRate, language, setLanguage, t }) => {
     return (
-        <nav className="flex items-center justify-between px-4 py-4 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
+        <nav className="flex items-center justify-between px-3 sm:px-4 py-4 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
             <h1 className="text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200 truncate mr-2">
                 {t.title}
             </h1>
