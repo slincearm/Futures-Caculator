@@ -60,8 +60,8 @@ function App() {
   // }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-yellow-500/30">
-      <div className="max-w-md mx-auto min-h-screen shadow-2xl bg-slate-900 border-x border-white/5 flex flex-col">
+    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-yellow-500/30 overflow-x-hidden">
+      <div className="w-full max-w-md mx-auto min-h-screen shadow-2xl bg-slate-900 border-x border-white/5 flex flex-col">
 
         <Navbar
           currency={currency}
