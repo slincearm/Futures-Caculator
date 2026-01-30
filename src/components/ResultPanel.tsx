@@ -12,7 +12,7 @@ interface ResultPanelProps {
     t: any;
 }
 
-export const ResultPanel: React.FC<ResultPanelProps> = ({ result, currency, recommendedEquity, recommendedRiskRatio, strategyMultiplier, onStrategyChange, t }) => {
+export const ResultPanel: React.FC<ResultPanelProps> = ({ result, currency, exchangeRate, recommendedEquity, recommendedRiskRatio, strategyMultiplier, onStrategyChange, t }) => {
 
     const displayedEquity = currency === 'USD' ? result.totalEquityUSD : result.totalEquityTWD;
     const currencySymbol = currency === 'USD' ? '$' : 'NT$';
@@ -62,7 +62,7 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({ result, currency, reco
                     {recommendedEquity && (
                         <div className="mt-2 text-xs">
                             <span className="text-indigo-300 bg-indigo-500/10 border border-indigo-500/20 px-2 py-0.5 rounded-md">
-                                {t.recommendedTotalEquity}: $ {fmt(recommendedEquity)}
+                                {t.recommendedTotalEquity}: {currencySymbol} {fmt(currency === 'USD' ? recommendedEquity : recommendedEquity * exchangeRate)}
                             </span>
                         </div>
                     )}

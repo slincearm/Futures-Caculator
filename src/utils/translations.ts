@@ -24,7 +24,7 @@ export const translations = {
         adviceHighRisk: '• 您的風險較高，建議補足保證金以提升至 150% 以上。',
         adviceWarning: '• 警告：接近催繳水位，請留意市場波動。',
         adviceGeneric: '• 請留意合約月份，接近結算日請提早轉倉。',
-        footer: 'MGC Micro Gold Risk Monitor © 2026\nOptimized for iPhone 17 Pro Max',
+        footer: 'MGC Micro Gold Risk Monitor © 2026',
     },
     en: {
         title: 'MGC Monitor',
@@ -49,6 +49,6 @@ export const translations = {
         adviceHighRisk: '• High risk detected. Recommend adding margin to reach >150%.',
         adviceWarning: '• Warning: Approaching margin call level. Monitor volatility.',
         adviceGeneric: '• Check contract month. Roll over early near settlement.',
-        footer: 'MGC Micro Gold Risk Monitor © 2026\nOptimized for iPhone 17 Pro Max',
+        footer: 'MGC Micro Gold Risk Monitor © 2026',
     }
 };

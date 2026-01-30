@@ -25,6 +25,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currency, setCurrency, exchangeR
                     <span className="text-xs text-slate-400 mr-2">{t.currencyLabel}</span>
                     <input
                         type="number"
+                        inputMode="decimal"
+                        pattern="[0-9]*"
                         value={exchangeRate || ''}
                         onChange={(e) => setExchangeRate(parseFloat(e.target.value))}
                         className="w-16 bg-transparent text-sm text-right font-mono text-white focus:outline-none"
@@ -36,6 +38,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currency, setCurrency, exchangeR
                 <div className="sm:hidden flex items-center bg-slate-800 rounded-full px-2 py-1 border border-white/10">
                     <input
                         type="number"
+                        inputMode="decimal"
+                        pattern="[0-9]*"
                         value={exchangeRate || ''}
                         onChange={(e) => setExchangeRate(parseFloat(e.target.value))}
                         className="w-12 bg-transparent text-xs text-right font-mono text-white focus:outline-none"

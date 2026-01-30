@@ -14,8 +14,6 @@ export const InputCard: React.FC<InputCardProps> = ({ state, onChange, t }) => {
         onChange(key, isNaN(val) ? 0 : val);
     };
 
-    const fmt = (n: number) => n.toLocaleString('zh-TW', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
-
     return (
         <div className="p-4 sm:p-5 bg-slate-800/40 backdrop-blur-sm rounded-2xl border border-white/5 space-y-4">
 
@@ -25,26 +23,38 @@ export const InputCard: React.FC<InputCardProps> = ({ state, onChange, t }) => {
                     <label className="text-xs text-slate-400">{t.holdings}</label>
                     <input
                         type="number"
+                        inputMode="decimal"
+                        pattern="[0-9]*"
                         value={state.lots || ''}
                         onChange={(e) => handleNumberChange('lots', e)}
                         placeholder="1"
-                        className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-3 py-2.5 text-slate-100 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all text-sm font-mono placeholder:text-slate-600 text-center text-lg"
+                        className="w-full bg-slate-900/50 border border-white/10 rounded-xl px-3 py-2.5 text-slate-100 focus:outline-none focus:ring-1 focus:ring-yellow-500 transition-all text-sm font-mono placeholder:text-slate-600 text-center text-lg sm:text-lg"
                     />
                 </div>
 
-                {/* Row 1.5 - Margins Info (Moved from ResultPanel) */}
+                {/* Row 1.5 - Margins Inputs */}
                 <div className="col-span-2 grid grid-cols-2 gap-3 pb-2 border-b border-white/5">
-                    <div className="bg-slate-900/30 border border-white/5 rounded-lg p-3">
-                        <p className="text-[10px] text-slate-500 mb-1">{t.initialMargin}</p>
-                        <p className="text-sm font-mono font-semibold text-slate-300">
-                            {fmt(state.initialMargin)}
-                        </p>
+                    <div className="bg-slate-900/30 border border-white/5 rounded-lg p-2 sm:p-3 relative group focus-within:ring-1 focus-within:ring-indigo-500/50 transition-all">
+                        <label className="text-[10px] text-slate-500 mb-1 block">{t.initialMargin}</label>
+                        <input
+                            type="number"
+                            inputMode="decimal"
+                            pattern="[0-9]*"
+                            value={state.initialMargin || ''}
+                            onChange={(e) => handleNumberChange('initialMargin', e)}
+                            className="w-full bg-transparent text-sm font-mono font-semibold text-slate-300 focus:outline-none placeholder:text-slate-700"
+                        />
                     </div>
-                    <div className="bg-slate-900/30 border border-white/5 rounded-lg p-3">
-                        <p className="text-[10px] text-slate-500 mb-1">{t.maintenanceMargin}</p>
-                        <p className="text-sm font-mono font-semibold text-slate-300">
-                            {fmt(state.maintenanceMargin)}
-                        </p>
+                    <div className="bg-slate-900/30 border border-white/5 rounded-lg p-2 sm:p-3 relative group focus-within:ring-1 focus-within:ring-indigo-500/50 transition-all">
+                        <label className="text-[10px] text-slate-500 mb-1 block">{t.maintenanceMargin}</label>
+                        <input
+                            type="number"
+                            inputMode="decimal"
+                            pattern="[0-9]*"
+                            value={state.maintenanceMargin || ''}
+                            onChange={(e) => handleNumberChange('maintenanceMargin', e)}
+                            className="w-full bg-transparent text-sm font-mono font-semibold text-slate-300 focus:outline-none placeholder:text-slate-700"
+                        />
                     </div>
                 </div>
 
@@ -54,6 +64,8 @@ export const InputCard: React.FC<InputCardProps> = ({ state, onChange, t }) => {
                         <label className="text-xs text-slate-400">{t.usdEquity}</label>
                         <input
                             type="number"
+                            inputMode="decimal"
+                            pattern="[0-9]*"
                             value={state.balanceUSD || ''}
                             onChange={(e) => handleNumberChange('balanceUSD', e)}
                             placeholder="0.00"
@@ -65,6 +77,8 @@ export const InputCard: React.FC<InputCardProps> = ({ state, onChange, t }) => {
                         <label className="text-xs text-slate-400">{t.twdEquity}</label>
                         <input
                             type="number"
+                            inputMode="decimal"
+                            pattern="[0-9]*"
                             value={state.balanceTWD || ''}
                             onChange={(e) => handleNumberChange('balanceTWD', e)}
                             placeholder="0"
