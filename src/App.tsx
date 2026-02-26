@@ -16,22 +16,47 @@ function App() {
 
   const t = translations[language];
 
-  const [inputState, setInputState] = useState<InputState>({
-    contractMonth: '2412',
-    currentPrice: 2750,
-    lots: 1,
-    exchangeRate: 31.495,
-    balanceUSD: 8751,
-    balanceTWD: 102251,
-    initialMargin: CONSTANTS.IM,
-    maintenanceMargin: CONSTANTS.MM,
+  const [inputState, setInputState] = useState<InputState>(() => {
+    const savedIM = localStorage.getItem('mgc_initial_margin');
+    const savedMM = localStorage.getItem('mgc_maintenance_margin');
+    const savedBalanceUSD = localStorage.getItem('mgc_balance_usd');
+    const savedBalanceTWD = localStorage.getItem('mgc_balance_twd');
+    const savedLots = localStorage.getItem('mgc_lots');
+    return {
+      contractMonth: '2412',
+      currentPrice: 2750,
+      lots: savedLots !== null ? Number(savedLots) : 1,
+      exchangeRate: 31.495,
+      balanceUSD: savedBalanceUSD !== null ? Number(savedBalanceUSD) : 0,
+      balanceTWD: savedBalanceTWD !== null ? Number(savedBalanceTWD) : 0,
+      initialMargin: savedIM ? Number(savedIM) : CONSTANTS.IM,
+      maintenanceMargin: savedMM ? Number(savedMM) : CONSTANTS.MM,
+    };
   });
 
   const handleInputChange = (key: keyof InputState, value: string | number) => {
-    setInputState(prev => ({
-      ...prev,
-      [key]: value
-    }));
+    setInputState(prev => {
+      const newState = {
+        ...prev,
+        [key]: value
+      };
+      if (key === 'initialMargin') {
+        localStorage.setItem('mgc_initial_margin', String(value));
+      }
+      if (key === 'maintenanceMargin') {
+        localStorage.setItem('mgc_maintenance_margin', String(value));
+      }
+      if (key === 'balanceUSD') {
+        localStorage.setItem('mgc_balance_usd', String(value));
+      }
+      if (key === 'balanceTWD') {
+        localStorage.setItem('mgc_balance_twd', String(value));
+      }
+      if (key === 'lots') {
+        localStorage.setItem('mgc_lots', String(value));
+      }
+      return newState;
+    });
   };
 
   const handleStrategyChange = (multiplier: number | null) => {
