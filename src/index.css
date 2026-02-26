@@ -3,6 +3,7 @@
 @tailwind utilities;
 
 html, body {
+  @apply bg-slate-950;
   overflow-x: hidden;
   width: 100%;
   position: fixed; /* Fix for iOS bounce/scroll issues in some cases, verify if needed, usually simple overflow-x: hidden is enough but position fixed helps PWA */

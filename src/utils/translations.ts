@@ -2,7 +2,7 @@ export type Language = 'zh' | 'en';
 
 export const translations = {
     zh: {
-        title: 'MGC 監控',
+        title: '微金風控',
         currencyLabel: 'USD/TWD',
         holdings: '持倉',
         usdEquity: '美金權益總值',
