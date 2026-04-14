@@ -92,6 +92,18 @@ export const ResultPanel: React.FC<ResultPanelProps> = ({ result, currency, exch
                 {/* Background Glow */}
                 <div className={`absolute top-0 right-0 -mt-4 -mr-4 w-24 h-24 rounded-full blur-3xl opacity-20 ${riskColor.replace('text-', 'bg-')}`}></div>
             </div>
+
+            {/* Points Drop Card */}
+            <div className="grid grid-cols-2 gap-3">
+                <div className="bg-slate-800/40 border border-yellow-500/10 rounded-xl p-3 flex flex-col justify-center">
+                    <span className="text-slate-400 text-[10px] mb-1">{t.pointsToMarginCallLabel}</span>
+                    <span className="text-yellow-400 font-mono text-lg font-bold">-{fmt(result.pointsToMarginCall)} <span className="text-xs font-sans font-normal text-slate-500">{t.pointsUnit}</span></span>
+                </div>
+                <div className="bg-slate-800/40 border border-red-500/10 rounded-xl p-3 flex flex-col justify-center">
+                    <span className="text-slate-400 text-[10px] mb-1">{t.pointsToLiquidationLabel}</span>
+                    <span className="text-red-400 font-mono text-lg font-bold">-{fmt(result.pointsToLiquidation)} <span className="text-xs font-sans font-normal text-slate-500">{t.pointsUnit}</span></span>
+                </div>
+            </div>
         </div>
     );
 };

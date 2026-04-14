@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Navbar } from './components/Navbar'
 import { InputCard } from './components/InputCard'
 import { ResultPanel } from './components/ResultPanel'
@@ -26,7 +26,7 @@ function App() {
       contractMonth: '2412',
       currentPrice: 2750,
       lots: savedLots !== null ? Number(savedLots) : 1,
-      exchangeRate: 31.495,
+      exchangeRate: 0, // Will be fetched dynamically
       balanceUSD: savedBalanceUSD !== null ? Number(savedBalanceUSD) : 0,
       balanceTWD: savedBalanceTWD !== null ? Number(savedBalanceTWD) : 0,
       initialMargin: savedIM ? Number(savedIM) : CONSTANTS.IM,
@@ -79,10 +79,31 @@ function App() {
   // Real-time calculation
   const results = useMemo(() => calculateResults(inputState), [inputState]);
 
-  // TODO: 串接 API - Connect API for real-time price and exchange rate updates
-  // useEffect(() => {
-  //   // Future implementation: Fetch MGC price and USD/TWD rate here
-  // }, []);
+  // Fetch real-time exchange rate on mount from FinMind API
+  useEffect(() => {
+    const fetchExchangeRate = async () => {
+      try {
+        const today = new Date().toISOString().split('T')[0];
+        const url = `https://api.finmindtrade.com/api/v3/data?dataset=TaiwanExchangeRate&data_id=USD&date=${today}`;
+        const response = await fetch(url);
+        const json = await response.json();
+        
+        if (json.msg === 'success' && json.data && json.data.length > 0) {
+          const latestData = json.data[json.data.length - 1];
+          const rate = latestData.spot_sell || latestData.cash_sell || 31.495;
+          handleInputChange('exchangeRate', rate);
+        }
+      } catch (error) {
+        console.error('Failed to fetch exchange rate:', error);
+        // Fallback if API fails
+        if (inputState.exchangeRate === 0) {
+           handleInputChange('exchangeRate', 31.495);
+        }
+      }
+    };
+
+    fetchExchangeRate();
+  }, []);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-yellow-500/30 overflow-x-hidden">

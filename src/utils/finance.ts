@@ -20,18 +20,26 @@ export const calculateResults = (state: InputState): CalculationResult => {
 
     const riskRatio = lots > 0 ? (totalEquityUSD / totalIM) * 100 : 0;
 
+    // Margin Call Risk Ratio is 130%
+    const callEquityTarget = totalIM * 1.30;
+    // Liquidation Risk Ratio is 25%
+    const liquidationEquityTarget = totalIM * 0.25;
+
+    const dropToCallUSD = totalEquityUSD - callEquityTarget;
+    const dropToLiquidationUSD = totalEquityUSD - liquidationEquityTarget;
+
+    const pointsToMarginCall = lots > 0 && dropToCallUSD > 0 ? dropToCallUSD / (lots * CONSTANTS.CONTRACT_SIZE) : 0;
+    const pointsToLiquidation = lots > 0 && dropToLiquidationUSD > 0 ? dropToLiquidationUSD / (lots * CONSTANTS.CONTRACT_SIZE) : 0;
+
     // 3. Margin Call Price
-    const equitySurplus = totalEquityUSD - totalMM;
-    const priceDropToCall = lots > 0 ? equitySurplus / (lots * CONSTANTS.CONTRACT_SIZE) : 0;
-    const marginCallPrice = lots > 0 ? currentPrice - priceDropToCall : 0;
+    const marginCallPrice = lots > 0 ? currentPrice - pointsToMarginCall : 0;
 
     // 4. Liquidation Price
-    const priceDropTo0 = lots > 0 ? totalEquityUSD / (lots * CONSTANTS.CONTRACT_SIZE) : 0;
-    const liquidationPrice = lots > 0 ? currentPrice - priceDropTo0 : 0;
+    const liquidationPrice = lots > 0 ? currentPrice - pointsToLiquidation : 0;
 
     // Status
-    const isCall = lots > 0 && totalEquityUSD < totalMM;
-    const isLiquidated = totalEquityUSD <= 0;
+    const isCall = lots > 0 && riskRatio <= 130;
+    const isLiquidated = lots > 0 && riskRatio <= 25;
 
     return {
         totalEquityUSD,
@@ -39,6 +47,8 @@ export const calculateResults = (state: InputState): CalculationResult => {
         riskRatio,
         marginCallPrice,
         liquidationPrice,
+        pointsToMarginCall,
+        pointsToLiquidation,
         isCall,
         isLiquidated
     };

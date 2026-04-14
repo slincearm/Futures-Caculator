@@ -17,6 +17,8 @@ export interface CalculationResult {
     riskRatio: number; // Percentage
     marginCallPrice: number;
     liquidationPrice: number;
+    pointsToMarginCall: number;
+    pointsToLiquidation: number;
     isCall: boolean;
     isLiquidated: boolean;
 }

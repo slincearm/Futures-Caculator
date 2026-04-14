@@ -7,6 +7,6 @@ export default defineConfig({
   base: '/Futures-Caculator/',
   plugins: [react(), viteSingleFile()],
   server: {
-    host: '192.168.200.171',
+    host: '192.168.101.99',
   },
 })

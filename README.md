@@ -15,7 +15,8 @@ MGC 微型黃金期貨風險監控計算器
 - **PWA (網頁應用程式) 支援**：支援 iPhone 及桌機將網頁加入主畫面作為獨立 APP 執行，擁有專屬的微金風控 APP 圖示。
 
 ## TODO
-- [ ] **串接 API**：整合即時報價 API 以獲取最新的 MGC 價格與匯率 (Connect Real-time API)。
+- [x] **串接 API**：整合即時報價 API 以獲取最新的 MGC 價格與匯率 (Connect Real-time API)。
+- [x] **距離點數試算**：實作催繳（130%）與斷頭（25%）所剩點數試算。
 
 ## 技術棧
 - React 19 + TypeScript
