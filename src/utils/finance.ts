@@ -2,7 +2,7 @@ import type { InputState, CalculationResult } from '../types';
 import { CONSTANTS } from '../types';
 
 export const calculateResults = (state: InputState): CalculationResult => {
-    const { currentPrice, lots, exchangeRate, balanceUSD, balanceTWD, initialMargin, maintenanceMargin } = state;
+    const { currentPrice, lots, exchangeRate, balanceUSD, balanceTWD, initialMargin } = state;
 
     // Handle invalid exchange rate
     const safeRate = exchangeRate > 0 ? exchangeRate : 1;
@@ -15,7 +15,6 @@ export const calculateResults = (state: InputState): CalculationResult => {
     const totalEquityTWD = (balanceUSD * safeRate) + balanceTWD;
 
     // 2. Risk Indicators
-    const totalMM = maintenanceMargin * lots;
     const totalIM = initialMargin * lots;
 
     const riskRatio = lots > 0 ? (totalEquityUSD / totalIM) * 100 : 0;
